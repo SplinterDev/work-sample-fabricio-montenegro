@@ -8,26 +8,26 @@ function MoviesList() {
 
   useEffect(() => {
 
-    const movies = JSON.parse(localStorage.getItem('movies'));
+    const storedMovies = JSON.parse(localStorage.getItem('movies'));
 
-    if (movies) {
-      setMovies(movies);
+    if (storedMovies) {
+      setMovies(storedMovies);
     } else {
       fetch(`${ENDPOINT}/movies`)
         .then(res => res.json())
-        .then(res => {
-          localStorage.setItem('movies', JSON.stringify(res));
-          setMovies(res);
+        .then(fetchedMovies => {
+
+          fetchedMovies.sort((a, b) => (
+            (a.title < b.title) ? -1 : (a.title > b.title) ? 1 : 0
+          ));
+
+          localStorage.setItem('movies', JSON.stringify(fetchedMovies));
+          setMovies(fetchedMovies);
         })
         .catch(err => console.error(err));
     }
 
-    return () => {
-      // cleanup
-    }
-  }, ['input'])
-
-console.log(movies);
+  }, [])
 
   return (
     <ul>
