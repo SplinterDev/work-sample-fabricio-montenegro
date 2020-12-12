@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import MoviesList from './containers/MoviesList/MoviesList';
+import MoviesList from './components/MoviesList/MoviesList';
 
 const ENDPOINT = 'https://us-central1-beacon-fe-worksample-api.cloudfunctions.net/app';
 
@@ -25,7 +25,7 @@ function App() {
   - be case-insensitive
   - exact match on any substring in `title`
 
-  - [ ] Allow filtering by decade. Decade options should be computed from the data, _not hard-coded_. Selecting a decade should filter the list to show all movies from that decade.
+  - [x] Allow filtering by decade. Decade options should be computed from the data, _not hard-coded_. Selecting a decade should filter the list to show all movies from that decade.
 
   - [ ] When a movie row is clicked, expand the row to show what Evan says about the movie. Clicking the row again should collapse it.
 
@@ -109,7 +109,7 @@ function App() {
             }
           </select>
         </div>
-        <MoviesList movies={movies} decadeSearch={decadeSearch} titleSearch={titleSearch}></MoviesList>
+        <MoviesList movies={movies} decadeSearch={decadeSearch} titleSearch={titleSearch} />
       </main>
     </div>
   );

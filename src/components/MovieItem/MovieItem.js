@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+import MovieDetails from '../MovieDetails/MovieDetails';
 
 function MovieItem(props) {
 
   const {movie} = props;
+  const [expanded, setExpanded] = useState(false);
 
   /*
     id: Number
@@ -19,12 +21,16 @@ function MovieItem(props) {
     cover-url: String
   */
 
+  const handleClick = () => {
+    setExpanded(!expanded);
+  }
 
   return (
-    <li>
+    <li onClick={handleClick}>
       <span>{movie.score * 100}% </span>
       <a href={movie.url}>{movie.title}</a>
       <span> ({movie.year})</span>
+      { expanded && <MovieDetails movieId={movie.id} /> }
     </li>
   )
 }

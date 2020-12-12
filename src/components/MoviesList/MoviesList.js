@@ -1,5 +1,5 @@
 import React from 'react';
-import MovieItem from '../../components/MovieItem/MovieItem';
+import MovieItem from '../MovieItem/MovieItem';
 
 function MoviesList(props) {
 
@@ -26,7 +26,10 @@ function MoviesList(props) {
     <ul>
       {filteredMovies.length
         ? filteredMovies.map((movie) => (
-            <MovieItem key={movie.id} movie={movie}></MovieItem>
+            <MovieItem
+              key={movie.id}
+              movie={movie}
+            />
           ))
         : <p>Sorry, no movies match your search :(</p>
       }
