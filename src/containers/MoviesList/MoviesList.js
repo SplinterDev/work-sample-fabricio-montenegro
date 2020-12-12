@@ -1,36 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import MovieItem from '../../components/MovieItem/MovieItem';
-
-const ENDPOINT = 'https://us-central1-beacon-fe-worksample-api.cloudfunctions.net/app';
 
 function MoviesList(props) {
 
-  const [movies, setMovies] = useState([]);
-  const {search} = props;
-
-  useEffect(() => {
-
-    const storedMovies = JSON.parse(localStorage.getItem('movies'));
-
-    if (storedMovies) {
-      setMovies(storedMovies);
-    } else {
-      fetch(`${ENDPOINT}/movies`)
-        .then(res => res.json())
-        .then(fetchedMovies => {
-
-          fetchedMovies.sort((a, b) => (
-            (a.title < b.title) ? -1 : (a.title > b.title) ? 1 : 0
-          ));
-
-          localStorage.setItem('movies', JSON.stringify(fetchedMovies));
-          setMovies(fetchedMovies);
-        })
-        .catch(err => console.error(err));
-    }
-
-  }, [])
-
+  const {search, movies} = props;
   let filteredMovies = movies;
 
   if (search.length >= 2) {
