@@ -1,0 +1,12 @@
+.MovieItem {
+  padding: 0.5rem;
+  cursor: pointer;
+
+  &.expanded {
+    background-color: #EEEEEE;
+  }
+
+  &:hover {
+    background-color: #EEEEEE;
+  }
+}

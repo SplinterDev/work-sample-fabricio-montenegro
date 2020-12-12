@@ -1,36 +1,30 @@
 import React, { useState } from 'react';
 import MovieDetails from '../MovieDetails/MovieDetails';
+import './MovieItem.scss';
 
 function MovieItem(props) {
 
   const {movie} = props;
   const [expanded, setExpanded] = useState(false);
 
-  /*
-    id: Number
-    title: String
-    year: Number
-    score: Number
-    director: String
-    url: String
-    synopsis: String
-    rating: String
-    runtime-in-minutes: Number
-    oscar-nominations: Number
-    oscars: Number
-    cover-url: String
-  */
-
   const handleClick = () => {
     setExpanded(!expanded);
   }
 
   return (
-    <li onClick={handleClick}>
+    <li onClick={handleClick} className={'MovieItem '+(expanded ? 'expanded' : '')}>
       <span>{movie.score * 100}% </span>
-      <a href={movie.url}>{movie.title}</a>
+      <a href={movie.url} onClick={e => e.stopPropagation()}>
+        {movie.title}
+      </a>
       <span> ({movie.year})</span>
-      { expanded && <MovieDetails movieId={movie.id} /> }
+      {expanded &&
+        <MovieDetails
+          movieId={movie.id}
+          coverUrl={movie['cover-url']}
+          title={movie.title}
+        />
+      }
     </li>
   )
 }

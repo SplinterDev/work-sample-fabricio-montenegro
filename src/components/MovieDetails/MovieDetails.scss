@@ -1,0 +1,13 @@
+.MovieDetails {
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    max-width: calc(100% - 170px);
+  }
+
+  img {
+    max-width: 150px;
+    max-height: 222px;
+  }
+}

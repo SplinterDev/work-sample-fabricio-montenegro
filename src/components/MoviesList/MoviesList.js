@@ -1,5 +1,6 @@
 import React from 'react';
 import MovieItem from '../MovieItem/MovieItem';
+import './MoviesList.scss'
 
 function MoviesList(props) {
 
@@ -23,7 +24,7 @@ function MoviesList(props) {
   }
 
   return (
-    <ul>
+    <ul className="MoviesList">
       {filteredMovies.length
         ? filteredMovies.map((movie) => (
             <MovieItem
