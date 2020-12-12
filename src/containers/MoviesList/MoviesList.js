@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import MovieItem from '../../components/MovieItem/MovieItem';
 
 const ENDPOINT = 'https://us-central1-beacon-fe-worksample-api.cloudfunctions.net/app';
 
@@ -32,7 +33,7 @@ function MoviesList() {
   return (
     <ul>
       {movies.map((movie) => (
-        <li key={movie.id}>{movie.title}</li>
+        <MovieItem key={movie.id} movie={movie}></MovieItem>
       ))}
     </ul>
   )

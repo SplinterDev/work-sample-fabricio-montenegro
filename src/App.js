@@ -7,7 +7,7 @@ function App() {
   @TODO
   - [x] Display the list of movies on the page. Movies should be listed in alphabetical order.
 
-  - [ ] When a user clicks on the title of the movie, they should be redirected to the Rotten Tomatoes page for that movie.
+  - [x] When a user clicks on the title of the movie, they should be redirected to the Rotten Tomatoes page for that movie.
 
   - [ ] Display the year the movie was released next to the title.
 
