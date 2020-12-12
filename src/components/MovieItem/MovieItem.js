@@ -22,6 +22,7 @@ function MovieItem(props) {
 
   return (
     <li>
+      <span>{movie.score * 100}% </span>
       <a href={movie.url}>{movie.title}</a>
       <span> ({movie.year})</span>
     </li>
