@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css';
 import MoviesList from './containers/MoviesList/MoviesList';
 
@@ -11,11 +12,11 @@ function App() {
 
   - [x] Display the year the movie was released next to the title.
 
-  - [ ] Display the Rotten Tomatoes rating next to each movie title in the list. This value should be displayed as a percentage.
+  - [x] Display the Rotten Tomatoes rating next to each movie title in the list. This value should be displayed as a percentage.
 
-  - [ ] In order to not spam our API, cache the responses in the browsers [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API).  Do not make network requests to the API if there is a cached version of the response available.
+  - [x] In order to not spam our API, cache the responses in the browsers [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API).  Do not make network requests to the API if there is a cached version of the response available.
 
-  - [ ] Allow searching by title. Only filter results if 2 or more characters are entered in the search box. The list below should update when the value of the search box changes.
+  - [x] Allow searching by title. Only filter results if 2 or more characters are entered in the search box. The list below should update when the value of the search box changes.
 
   Search should
 
@@ -34,7 +35,7 @@ function App() {
 
 
 
-
+  const [search, setSearch] = useState('');
 
 
 
@@ -45,7 +46,18 @@ function App() {
         <h1>Movies Evan Likes!</h1>
         <p>Below is a (not) comprehensive list of movies that Evan really likes.</p>
       </header>
-      <MoviesList></MoviesList>
+      <main>
+        <input
+          type="text"
+          name="search"
+          placeholder="Search by title"
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+        />
+        <MoviesList search={search}></MoviesList>
+      </main>
     </div>
   );
 }

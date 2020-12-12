@@ -3,9 +3,10 @@ import MovieItem from '../../components/MovieItem/MovieItem';
 
 const ENDPOINT = 'https://us-central1-beacon-fe-worksample-api.cloudfunctions.net/app';
 
-function MoviesList() {
+function MoviesList(props) {
 
   const [movies, setMovies] = useState([]);
+  const {search} = props;
 
   useEffect(() => {
 
@@ -30,11 +31,24 @@ function MoviesList() {
 
   }, [])
 
+  let filteredMovies = movies;
+
+  if (search.length >= 2) {
+
+    filteredMovies = filteredMovies.filter(movie => (
+      movie.title.match(new RegExp(search, 'gi'))
+    ));
+
+  }
+
   return (
     <ul>
-      {movies.map((movie) => (
-        <MovieItem key={movie.id} movie={movie}></MovieItem>
-      ))}
+      {filteredMovies.length
+        ? filteredMovies.map((movie) => (
+            <MovieItem key={movie.id} movie={movie}></MovieItem>
+          ))
+        : <p>Sorry, no movies match your search :(</p>
+      }
     </ul>
   )
 }
