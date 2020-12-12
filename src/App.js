@@ -9,7 +9,7 @@ function App() {
 
   - [x] When a user clicks on the title of the movie, they should be redirected to the Rotten Tomatoes page for that movie.
 
-  - [ ] Display the year the movie was released next to the title.
+  - [x] Display the year the movie was released next to the title.
 
   - [ ] Display the Rotten Tomatoes rating next to each movie title in the list. This value should be displayed as a percentage.
 

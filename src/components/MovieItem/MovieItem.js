@@ -22,9 +22,8 @@ function MovieItem(props) {
 
   return (
     <li>
-      <a href={movie.url}>
-        {movie.title}
-      </a>
+      <a href={movie.url}>{movie.title}</a>
+      <span> ({movie.year})</span>
     </li>
   )
 }
