@@ -3,13 +3,21 @@ import MovieItem from '../../components/MovieItem/MovieItem';
 
 function MoviesList(props) {
 
-  const {search, movies} = props;
+  const {titleSearch, decadeSearch, movies} = props;
   let filteredMovies = movies;
 
-  if (search.length >= 2) {
+  if (decadeSearch !== '') {
 
     filteredMovies = filteredMovies.filter(movie => (
-      movie.title.match(new RegExp(search, 'gi'))
+      Math.floor(movie.year/10) === parseInt(decadeSearch)
+    ));
+
+  }
+
+  if (titleSearch.length >= 2) {
+
+    filteredMovies = filteredMovies.filter(movie => (
+      movie.title.match(new RegExp(titleSearch, 'gi'))
     ));
 
   }

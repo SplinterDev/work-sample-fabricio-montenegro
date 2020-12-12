@@ -34,8 +34,19 @@ function App() {
   - [ ] Display the movie art next to the review. The image files are provided by the API.
   */
 
-  const [search, setSearch] = useState('');
+  const [titleSearch, setTitleSearch] = useState('');
+  const [decadeSearch, setDecadeSearch] = useState('');
+
   const [movies, setMovies] = useState([]);
+  const [decades, setDecades] = useState([]);
+
+  // calculate the unique decades to create filter and sets them to the state
+  const calculateDecades = (movies) => {
+    const decades = movies.map(movie => Math.floor(movie.year/10));
+    const uniqueDecades = [...new Set(decades)].sort();
+
+    setDecades(uniqueDecades);
+  }
 
   useEffect(() => {
 
@@ -43,6 +54,7 @@ function App() {
 
     if (storedMovies) {
       setMovies(storedMovies);
+      calculateDecades(storedMovies);
     } else {
       fetch(`${ENDPOINT}/movies`)
         .then(res => res.json())
@@ -54,6 +66,7 @@ function App() {
 
           localStorage.setItem('movies', JSON.stringify(fetchedMovies));
           setMovies(fetchedMovies);
+          calculateDecades(fetchedMovies);
         })
         .catch(err => console.error(err));
     }
@@ -67,16 +80,36 @@ function App() {
         <p>Below is a (not) comprehensive list of movies that Evan really likes.</p>
       </header>
       <main>
-        <input
-          type="text"
-          name="search"
-          placeholder="Search by title"
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-          }}
-        />
-        <MoviesList movies={movies} search={search}></MoviesList>
+        <div>
+          <label htmlFor="title-search">Title:</label>
+          <input
+            id="title-search"
+            type="text"
+            placeholder="Search by title"
+            value={titleSearch}
+            onChange={(e) => {
+              setTitleSearch(e.target.value);
+            }}
+          />
+        </div>
+        <div>
+          <label htmlFor="decade-search">Decade:</label>
+          <select
+            id="decade-search"
+            value={decadeSearch}
+            onChange={(e) => {
+              setDecadeSearch(e.target.value);
+            }}
+          >
+            <option key={0} value=""></option>
+            {
+              decades.map(decade => (
+                <option key={decade} value={decade}>{decade*10}</option>
+              ))
+            }
+          </select>
+        </div>
+        <MoviesList movies={movies} decadeSearch={decadeSearch} titleSearch={titleSearch}></MoviesList>
       </main>
     </div>
   );
